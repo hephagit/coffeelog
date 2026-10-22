@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f1e8">
+  <meta name="description" content="기기 안에 커피 추출 기록을 저장하고 관리합니다.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <title>커피 추출 기록</title>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div><p class="eyebrow">MY BREW JOURNAL</p><h1>커피 추출 기록</h1></div>
+      <button id="backupButton" class="button button-light" type="button">백업·복원</button>
+    </header>
+
+    <nav class="tabs" role="tablist" aria-label="커피 기록 메뉴">
+      <button id="entryTab" class="tab-button active" type="button" role="tab" aria-selected="true" aria-controls="entryPage">오늘의 커피</button>
+      <button id="recordsTab" class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="recordsPage">기록 보기 <span id="tabRecordCount" class="tab-count">0</span></button>
+      <button id="settingsTab" class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="settingsPage">설정</button>
+    </nav>
+
+    <section id="entryPage" class="tab-page" role="tabpanel" aria-labelledby="entryTab">
+    <section class="panel form-panel" aria-labelledby="formTitle">
+      <div class="section-heading"><div><p class="eyebrow">NEW ENTRY</p><h2 id="formTitle">오늘의 커피</h2></div></div>
+      <form id="entryForm">
+        <input id="entryId" type="hidden">
+        <div class="form-grid">
+          <label class="date-field">날짜<div class="date-picker"><input id="date" name="date" type="date" required aria-label="날짜 선택"><span id="dateDisplay" class="date-display" aria-hidden="true"></span><button id="calendarButton" class="date-calendar-button" type="button" aria-label="달력 열기" title="달력 열기"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2.5"></rect><path d="M7.5 3v4M16.5 3v4M4 9.5h16"></path></svg></button></div></label>
+          <label>추출 도구<select id="tool" name="tool" required><option value="">목록에서 선택</option></select></label>
+          <label>원두 종류<select id="beans" name="beans" required><option value="">목록에서 선택</option></select></label>
+          <label>도징량<div class="input-unit"><input id="dose" name="dose" type="number" min="0" step="0.1" inputmode="decimal" placeholder="0" required><span>g</span></div></label>
+          <label>분쇄도<div class="input-unit"><input id="grind" class="value-right" name="grind" type="text" inputmode="decimal" maxlength="60" placeholder="회전.숫자.눈금" required><span>클릭</span></div></label>
+          <label>추출량<div class="input-unit"><input id="yield" name="yield" type="number" min="0" step="0.1" inputmode="decimal"><span>g</span></div></label>
+          <label class="time-field">추출 시간<div class="time-inputs"><div class="input-unit"><input id="timeHours" type="number" min="0" step="1" inputmode="numeric" aria-label="추출 시간 시"><span>시</span></div><div class="input-unit"><input id="timeMinutes" type="number" min="0" step="1" inputmode="numeric" aria-label="추출 시간 분"><span>분</span></div><div class="input-unit"><input id="timeSeconds" type="number" min="0" step="1" inputmode="numeric" aria-label="추출 시간 초"><span>초</span></div></div><input id="time" name="time" type="hidden" value="0"></label>
+          <label class="rating-field">평가<div id="starRating" class="star-rating" role="radiogroup" aria-label="별점 평가"><button type="button" class="star-button" data-rating="1" role="radio" aria-checked="false" aria-label="1점">☆</button><button type="button" class="star-button" data-rating="2" role="radio" aria-checked="false" aria-label="2점">☆</button><button type="button" class="star-button" data-rating="3" role="radio" aria-checked="false" aria-label="3점">☆</button><button type="button" class="star-button" data-rating="4" role="radio" aria-checked="false" aria-label="4점">☆</button><button type="button" class="star-button" data-rating="5" role="radio" aria-checked="false" aria-label="5점">☆</button></div><input id="rating" name="rating" type="hidden" value=""></label>
+          <label class="wide feedback-field">피드백<textarea id="feedback" name="feedback" rows="3" maxlength="1000" placeholder="맛과 향, 다음 추출에서 바꿀 점을 적어 주세요."></textarea></label>
+        </div>
+        <div class="form-actions"><button id="copyPreviousButton" class="button button-copy" type="button">직전 복사</button><button id="cancelEdit" class="button button-light" type="button" hidden>취소</button><button id="saveButton" class="button button-primary" type="submit">기록 저장</button></div>
+      </form>
+    </section>
+    </section>
+
+    <section id="recordsPage" class="tab-page" role="tabpanel" aria-labelledby="recordsTab" hidden>
+    <section class="records-section" aria-labelledby="recordsTitle">
+      <div class="section-heading records-heading"><div><p class="eyebrow">YOUR BREWS</p><h2 id="recordsTitle">기록 <span id="recordCount" class="count">0</span></h2></div></div>
+      <div class="filter-controls"><div class="filter-row" role="group" aria-label="기록 분류"><button class="filter-category-button active" type="button" data-category="all" aria-pressed="true">전체</button><button class="filter-category-button" type="button" data-category="tool" aria-pressed="false">추출 도구</button><button class="filter-category-button" type="button" data-category="beans" aria-pressed="false">원두 종류</button></div><div id="filterOptions" class="filter-options" role="group" aria-label="항목 목록" hidden></div><p id="filterSelectionLabel" class="filter-selection-label">전체 기록</p></div>
+      <div id="records" class="records-list" aria-live="polite"></div>
+      <p id="emptyState" class="empty-state">아직 기록이 없습니다.<br>첫 추출을 저장해 보세요.</p>
+    </section>
+    </section>
+
+    <section id="settingsPage" class="tab-page" role="tabpanel" aria-labelledby="settingsTab" hidden>
+      <section class="panel settings-panel" aria-labelledby="settingsTitle">
+        <div class="section-heading"><div><p class="eyebrow">YOUR OPTIONS</p><h2 id="settingsTitle">목록 설정</h2></div></div>
+        <p class="settings-note">추출 도구와 원두 종류를 등록해 두면 기록할 때 목록에서 선택할 수 있습니다.</p>
+        <div class="option-groups">
+          <section class="option-group"><h3>추출 도구</h3><ul id="toolOptions" class="option-list"></ul><button class="button button-light add-option-button" type="button" data-type="tool">＋ 추출 도구 추가</button><form id="toolAddForm" class="inline-add-form" hidden><input id="toolName" type="text" maxlength="120" placeholder="추출 도구 이름" aria-label="새 추출 도구 이름" required><button class="button button-primary" type="submit">추가</button><button class="button button-light cancel-option-button" type="button">취소</button></form></section>
+          <section class="option-group"><h3>원두 종류</h3><ul id="beanOptions" class="option-list"></ul><button class="button button-light add-option-button" type="button" data-type="beans">＋ 원두 종류 추가</button><form id="beanAddForm" class="inline-add-form" hidden><input id="beanName" type="text" maxlength="120" placeholder="원두 종류 이름" aria-label="새 원두 종류 이름" required><button class="button button-primary" type="submit">추가</button><button class="button button-light cancel-option-button" type="button">취소</button></form></section>
+        </div>
+      </section>
+    </section>
+    <footer><span>이 기기에 저장됩니다.</span><span id="storageStatus">IndexedDB 준비 중</span></footer>
+  </main>
+
+  <dialog id="backupDialog" class="dialog">
+    <div class="dialog-heading"><div><p class="eyebrow">YOUR DATA</p><h2>백업 및 복원</h2></div><button id="closeDialog" class="icon-button" type="button" aria-label="닫기">×</button></div>
+    <p class="dialog-note">백업 파일은 JSON 형식으로 내려받습니다. 복원하면 현재 기록이 백업 파일의 내용으로 교체됩니다.</p>
+    <div class="backup-actions"><button id="exportButton" class="button button-primary" type="button">JSON 백업 다운로드</button><label class="button button-light file-label">JSON 파일에서 복원<input id="importFile" type="file" accept="application/json,.json" hidden></label></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>

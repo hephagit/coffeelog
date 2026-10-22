@@ -1,0 +1,16 @@
+{
+  "id": ".",
+  "name": "커피 추출 기록",
+  "short_name": "커피 기록",
+  "description": "커피 추출 기록을 기기에 저장하고 관리합니다.",
+  "lang": "ko-KR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f6f1e8",
+  "theme_color": "#f6f1e8",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
