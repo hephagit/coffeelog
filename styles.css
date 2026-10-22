@@ -15,22 +15,4 @@ input[type="number"]{appearance:textfield;-moz-appearance:textfield}input[type="
 .button-copy{margin-right:auto;border:1px solid var(--accent);background:transparent;color:var(--accent)}.button-copy:hover{background:#315c450d}
 .record-review{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-top:8px}.record-review .record-rating{margin-top:0}.record-feedback{margin:0;padding:0;border:0;background:transparent;color:#70685f;font-size:12px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
 .record-status{width:max-content;margin:-3px 0 8px;padding:3px 7px;border-radius:20px;background:#f1eadc;color:#8a6a37;font-size:11px}
-@media(max-width:650px){
-  .shell{padding:18px 16px calc(16px + env(safe-area-inset-bottom))}
-  .topbar{margin-bottom:14px}
-  .tabs{margin-bottom:12px}
-  .form-panel{padding:15px 16px 16px}
-  .section-heading{margin-bottom:12px}
-  .form-grid{gap:9px 10px}
-  .form-grid label{gap:5px}
-  .form-grid input:not([type="hidden"]),.form-grid select,.feedback-field input{font-size:16px}
-  .form-grid input:not([type="hidden"]),.form-grid select{height:40px}
-  .date-picker,.date-display{height:40px}
-  .date-calendar-button{top:2px;width:35px;height:35px}
-  .time-inputs{min-height:40px}
-  .time-inputs .input-unit input{height:38px}
-  .star-rating{height:34px}
-  .star-button{height:32px;font-size:25px}
-  .feedback-field input{height:40px;padding:0 10px}
-  .form-actions{margin-top:12px}
-}
+@media(max-width:650px){.form-grid input:not([type="hidden"]),.form-grid select{font-size:16px}}

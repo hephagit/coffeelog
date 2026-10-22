@@ -565,7 +565,6 @@ async function start() {
   updateDateDisplay();
   try {
     database = await openDatabase();
-    document.querySelector('#storageStatus').textContent = 'IndexedDB 연결됨';
     const entries = await getEntries();
     const options = await getOptions();
     for (const entry of entries) {
@@ -581,7 +580,6 @@ async function start() {
     await refreshList();
     if ('serviceWorker' in navigator) navigator.serviceWorker.register('./service-worker.js').catch(() => {});
   } catch {
-    document.querySelector('#storageStatus').textContent = '저장소 연결 오류';
     showToast('기록 저장소를 열지 못했습니다. 브라우저 설정을 확인해 주세요.');
   }
 }
