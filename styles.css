@@ -15,4 +15,4 @@ input[type="number"]{appearance:textfield;-moz-appearance:textfield}input[type="
 .button-copy{margin-right:auto;border:1px solid var(--accent);background:transparent;color:var(--accent)}.button-copy:hover{background:#315c450d}
 .record-review{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-top:8px}.record-review .record-rating{margin-top:0}.record-feedback{margin:0;padding:0;border:0;background:transparent;color:#70685f;font-size:12px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
 .record-status{width:max-content;margin:-3px 0 8px;padding:3px 7px;border-radius:20px;background:#f1eadc;color:#8a6a37;font-size:11px}
-@media(max-width:650px){.form-grid input:not([type="hidden"]),.form-grid select{font-size:16px}.record-meta>span:first-child{flex-basis:100%}}
+@media(max-width:650px){.form-grid input:not([type="hidden"]),.form-grid select,.settings-panel input:not([type="hidden"]),.settings-panel select{font-size:16px}.record-meta>span:first-child{flex-basis:100%}}
